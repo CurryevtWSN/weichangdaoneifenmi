@@ -59,21 +59,22 @@ map_dict = {
 }
 
 # 4. 加载资源（模型与参考数据）
-@st.cache_resource
-def load_resources():
-    # 使用 os.path.join 构建绝对路径
-    model_file = os.path.join(CURRENT_DIR, 'xgb_model.pkl')
-    data_file = os.path.join(CURRENT_DIR, 'train.csv')
+# @st.cache_resource
+# def load_resources():
+#     # 使用 os.path.join 构建绝对路径
+#     model_file = os.path.join(CURRENT_DIR, 'xgb_model.pkl')
+#     data_file = os.path.join(CURRENT_DIR, 'train.csv')
     
-    # 检查文件物理存在性，若不存在则在前端报错
-    if not os.path.exists(model_file) or not os.path.exists(data_file):
-        return None, None
+#     # 检查文件物理存在性，若不存在则在前端报错
+#     if not os.path.exists(model_file) or not os.path.exists(data_file):
+#         return None, None
     
-    model = joblib.load(model_file)
-    data = pd.read_csv(data_file)
-    return model, data
-
-xgb_model, hp_train = load_resources()
+#     model = joblib.load(model_file)
+#     data = pd.read_csv(data_file)
+#     return model, data
+xgb_model = joblib.load('xgb_model.pkl')
+hp_train = pd.read_csv("train.csv")
+# xgb_model, hp_train = load_resources()
 
 # 如果资源加载失败，停止运行并提示用户
 if xgb_model is None or hp_train is None:
@@ -160,4 +161,5 @@ if st.button('Run Prediction Analysis'):
         disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=['No Metastasis', 'Metastasis'])
         disp.plot(cmap='Blues', ax=ax_cm)
         plt.title("Confusion Matrix")
+
         st.pyplot(fig_cm)
