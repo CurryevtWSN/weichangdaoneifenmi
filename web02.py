@@ -23,7 +23,7 @@ st.set_page_config(
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # 页面标题
-st.title('Development and Validation of a Machine Learning–Based Model for Early Prediction of Distant Metastasis in Gastroenteropancreatic Neuroendocrine Neoplasms: A Cohort Study')
+st.title('Early Prediction of Distant Metastasis in Gastroenteropancreatic Neuroendocrine Neoplasms Using Machine Learning: A Population-Based Cohort Study')
 st.markdown('---')
 
 # 2. 侧边栏：输入患者临床特征
@@ -163,3 +163,4 @@ if st.button('Run Prediction Analysis'):
         plt.title("Confusion Matrix")
 
         st.pyplot(fig_cm)
+
